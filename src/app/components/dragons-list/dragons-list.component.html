@@ -1,1 +1,5 @@
-<p>dragons-list works!</p>
+<section *ngIf="dragonsList">
+    <div *ngFor="let dragon of dragonsList">
+        {{ dragon.name }}
+    </div>
+</section>

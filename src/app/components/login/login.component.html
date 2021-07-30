@@ -1,0 +1,27 @@
+<section class="login">
+    <div>
+        <h1>DRAGONS LIST SING ON</h1>
+    </div>
+
+    <form class="info" [formGroup]="formLogin">
+        <div class="info-address">
+            <span>Login:</span>
+            <input type="text" formControlName="login">
+        </div>
+
+        <div class="info-password">
+            <span>Senha:</span>
+            <input [type]="passType" formControlName="pass">
+            <input type="button" value="{{ passDisplayed ? 'Ocultar' : 'Mostrar' }}" (click)="showPass()">
+        </div>
+
+        <div class="error">
+
+            
+        </div>
+    </form>
+
+    <div class="btn">
+        <button [disabled]="formLogin.invalid" (click)="signOn()"> Entrar </button>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+section {
+    text-align: center;
+}
+
+.info {
+    padding: 8px 40px 0px 0px;
+    span {
+        padding: 8px;
+    }
+    &-address {
+        padding: 8px;
+    }
+    &-password {
+        padding: 8px 8px 8px 70px;
+    }
+}
+
+input[type="button"] {
+    background-color: white;
+    border-color: white;
+    border-style: groove;
+    min-width: 62px;
+}
+
+.error {
+    color: red;
+    padding: 0px 0px 0px 40px;
+}
+
+
+.btn {
+    padding: 16px;
+}

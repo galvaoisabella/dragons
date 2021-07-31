@@ -1,7 +1,45 @@
 u {
     padding: 8px;
+    cursor: pointer;
+}
+p {
+    margin: 0px;
+    padding: 12px 8px 0px;
 }
 .info {
     padding: 8px;
 }
 
+input[type="text"] {
+    margin: 8px;
+}
+
+.separator {
+    border-bottom: 1px solid gray;
+    width: 100%;
+    margin: 14px 0px;
+}
+
+label {
+    font-size: 0.65rem;
+    cursor: pointer;
+}
+
+h3 {
+    margin: 0px;
+}
+.detail {
+    button {
+        width: 200px;
+        margin: 8px;
+        cursor: pointer;
+    }
+}
+
+section {
+    padding-right: 16px;
+}
+
+.btn {
+    padding: 8px;
+}

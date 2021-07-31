@@ -1,15 +1,26 @@
 <section *ngIf="dragonsList">
     <div class="info" *ngFor="let dragon of dragonsList">
-        <button class="accordion">{{ dragon.name }}</button>
-        <div class="panel">
-            <form [formGroup]="dragonForm">
-                <input formControlName="type">
-            </form>
-
+        <div>
             <div class="btn">
-                <u (click)="deleteDragon(dragon.id)"> Remover </u>
-                <u (click)="teste( dragonForm.value)">Alterar </u>
+                <button (click)="redirectToDetails(dragon.id)" class="detail">
+                    <h3>{{ dragon.name }}</h3> 
+                    <label>Clique para ver detalhes</label>
+                </button>                               
+                    <u (click)="deleteDragon(dragon.id)"> Remover </u>                
             </div>
-        </div>        
+            <p>Edite o cadastro: </p>
+            <div class="panel">                
+                <form [formGroup]="dragonForm">
+                    <input type="text" placeholder="Nome" formControlName="name">
+                    <input type="text" placeholder="Tipo" formControlName="type">
+                    <input type="text" placeholder="História" formControlName="histories">
+                </form>
+
+                <div class="btn">
+                    <button (click)="editDragon(dragon,dragonForm.value)">Alterar </button>
+                </div>
+            </div>
+            <div class="separator"></div>
+        </div>
     </div>
 </section>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Dragon } from 'src/app/interface/dragons.interface';
 import { DragonsService } from 'src/app/services/dragons.service';
@@ -12,18 +13,20 @@ moment.locale('pt-br');
   styleUrls: ['./dragons-list.component.scss']
 })
 export class DragonsListComponent implements OnInit {
-
+  edit: boolean = false;
   dragonForm!: FormGroup;
   dragonsList!: Dragon[];
   dragonDetails!: Dragon;
 
   constructor(
     private readonly dragonsService: DragonsService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
     this.listDragons();
+    this.detailsList('8');
 
     // const dragon: Dragon = {
     //   name: 'Morte Rubra',
@@ -54,6 +57,7 @@ export class DragonsListComponent implements OnInit {
     this.dragonsService.listDragons().subscribe(
       resp => {
         this.dragonsList = resp;
+        console.log('>>> lista', this.dragonsList)
 
         this.dragonsList.sort(function (a, b) {
           if (a.name > b.name) {
@@ -77,6 +81,7 @@ export class DragonsListComponent implements OnInit {
     this.dragonsService.getDragonDetails(id).subscribe(
       resp => {
         this.dragonDetails = resp;
+        console.log('>>> DETALJES', this.dragonDetails)
       }
     )
   }
@@ -103,18 +108,17 @@ export class DragonsListComponent implements OnInit {
  * @param id dragon index
  * @param dragon 
  */
-  editDragon(id: string, infoEdited: any) {
-    this.dragonsService.editDragon(id, infoEdited).subscribe(
-      resp => {
-        console.log('>> EDITADO', resp);
-      }
-    )
-  }
-
-  deleteDragon(id: string) {
-    this.dragonsService.deleteDragon(id).subscribe(
-      resp => {
-        console.log('>>>> DELETE', resp);
+  editDragon(dragon: Dragon, infoEdited: any) {
+    dragon = {
+      id: dragon.id,
+      createdAt: moment().format(),
+      name: infoEdited.name ? infoEdited.name : dragon.name,
+      histories: infoEdited.histories ? infoEdited.histories : dragon.histories,
+      type: infoEdited.type ? infoEdited.type : dragon.type
+    }
+    this.dragonsService.editDragon(dragon.id, dragon).subscribe(
+      () => {
+        this.ngOnInit();
       },
       error => {
         console.log('>>> ERRO', error);
@@ -123,9 +127,25 @@ export class DragonsListComponent implements OnInit {
     )
   }
 
-  teste(info: any) {
-    console.log('>>> INFOS', info)
+/**
+ * Delete a dragon
+ * @param id dragon index
+ */
+  deleteDragon(id: string) {
+    this.dragonsService.deleteDragon(id).subscribe(
+      () => {
+        this.ngOnInit();
+      },
+      error => {
+        console.log('>>> ERRO', error);
+        console.log('>>> MENSAGENS', error.status, error.statusText)
+      }
+    )
   }
 
+
+  redirectToDetails(id: string) {
+    this.router.navigate(['']);
+  }
 }
 

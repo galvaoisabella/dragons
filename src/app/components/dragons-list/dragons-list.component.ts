@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Dragon } from 'src/app/interface/dragons.interface';
 import { DragonsService } from 'src/app/services/dragons.service';
@@ -12,14 +13,38 @@ moment.locale('pt-br');
 })
 export class DragonsListComponent implements OnInit {
 
+  dragonForm!: FormGroup;
   dragonsList!: Dragon[];
   dragonDetails!: Dragon;
 
-  constructor(private readonly dragonsService: DragonsService) { }
+  constructor(
+    private readonly dragonsService: DragonsService,
+    private readonly formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.listDragons();
-    this.detailsList('1');
+
+    // const dragon: Dragon = {
+    //   name: 'Morte Rubra',
+    //   createdAt: moment().format(),
+    //   type: "Brasa",
+    //   histories: "Como treinar seu dragão"
+    // }
+
+    this.createFormDragon();
+  }
+
+  /**
+   * Create a dragon form
+   */
+  createFormDragon() {
+    this.dragonForm = this.formBuilder.group({
+      createdAt: '',
+      name: '',
+      type: '',
+      histories: '',
+    })
   }
 
   /**
@@ -29,6 +54,17 @@ export class DragonsListComponent implements OnInit {
     this.dragonsService.listDragons().subscribe(
       resp => {
         this.dragonsList = resp;
+
+        this.dragonsList.sort(function (a, b) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        });
+
       }
     )
   }
@@ -51,7 +87,7 @@ export class DragonsListComponent implements OnInit {
   */
   createDragon(dragon: Dragon) {
 
-    delete dragon.id;
+    //delete dragon.id;
 
     dragon.createdAt = moment().format();
 
@@ -75,16 +111,21 @@ export class DragonsListComponent implements OnInit {
     )
   }
 
-  deleteDragon(id:string) {
+  deleteDragon(id: string) {
     this.dragonsService.deleteDragon(id).subscribe(
       resp => {
         console.log('>>>> DELETE', resp);
       },
       error => {
-        console.log('>>> ERRO', error );
+        console.log('>>> ERRO', error);
         console.log('>>> MENSAGENS', error.status, error.statusText)
       }
     )
   }
 
+  teste(info: any) {
+    console.log('>>> INFOS', info)
+  }
+
 }
+

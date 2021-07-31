@@ -6,5 +6,5 @@ export interface Dragon {
     name: string,
     type: string,
     histories: string,
-    id?: string,
+    id: string,
 }

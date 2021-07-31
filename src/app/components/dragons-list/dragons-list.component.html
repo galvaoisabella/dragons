@@ -1,5 +1,15 @@
 <section *ngIf="dragonsList">
-    <div *ngFor="let dragon of dragonsList">
-        {{ dragon.name }}
+    <div class="info" *ngFor="let dragon of dragonsList">
+        <button class="accordion">{{ dragon.name }}</button>
+        <div class="panel">
+            <form [formGroup]="dragonForm">
+                <input formControlName="type">
+            </form>
+
+            <div class="btn">
+                <u (click)="deleteDragon(dragon.id)"> Remover </u>
+                <u (click)="teste( dragonForm.value)">Alterar </u>
+            </div>
+        </div>        
     </div>
 </section>

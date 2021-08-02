@@ -9,12 +9,18 @@ import { DragonsListComponent } from './components/dragons-list/dragons-list.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { DragonsService } from './services/dragons.service';
+import { DragonDetailsComponent } from './components/dragon-details/dragon-details.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { RegisterDragonComponent } from './components/register-dragon/register-dragon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DragonsListComponent
+    DragonsListComponent,
+    DragonDetailsComponent,
+    EmptyStateComponent,
+    RegisterDragonComponent
   ],
   imports: [
     BrowserModule,

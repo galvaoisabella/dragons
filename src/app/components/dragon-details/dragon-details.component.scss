@@ -1,0 +1,26 @@
+section {
+    padding: 16px;
+}
+
+p {
+    margin: 0px;
+}
+
+span {
+    font-weight: bold;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+        color: indianred;
+        padding: 8px;
+        margin: 0px;
+    }
+}
+
+.item {
+    padding: 8px;
+}

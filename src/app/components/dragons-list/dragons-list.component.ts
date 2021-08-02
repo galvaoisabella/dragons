@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, NavigationExtras } from '@angular/router';
 import * as moment from 'moment';
+import { PageRoutes } from 'src/app/enum/page-routes.enum';
 import { Dragon } from 'src/app/interface/dragons.interface';
+import { ErrorResp } from 'src/app/interface/error-resp.interface';
 import { DragonsService } from 'src/app/services/dragons.service';
 
 moment.locale('pt-br');
@@ -13,10 +15,10 @@ moment.locale('pt-br');
   styleUrls: ['./dragons-list.component.scss']
 })
 export class DragonsListComponent implements OnInit {
+
   edit: boolean = false;
   dragonForm!: FormGroup;
   dragonsList!: Dragon[];
-  dragonDetails!: Dragon;
 
   constructor(
     private readonly dragonsService: DragonsService,
@@ -26,15 +28,6 @@ export class DragonsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.listDragons();
-    this.detailsList('8');
-
-    // const dragon: Dragon = {
-    //   name: 'Morte Rubra',
-    //   createdAt: moment().format(),
-    //   type: "Brasa",
-    //   histories: "Como treinar seu dragão"
-    // }
-
     this.createFormDragon();
   }
 
@@ -57,7 +50,6 @@ export class DragonsListComponent implements OnInit {
     this.dragonsService.listDragons().subscribe(
       resp => {
         this.dragonsList = resp;
-        console.log('>>> lista', this.dragonsList)
 
         this.dragonsList.sort(function (a, b) {
           if (a.name > b.name) {
@@ -68,37 +60,9 @@ export class DragonsListComponent implements OnInit {
           }
           return 0;
         });
-
-      }
-    )
-  }
-
-  /**
-   * List of dragons
-   * @param id dragon index
-   */
-  detailsList(id: string) {
-    this.dragonsService.getDragonDetails(id).subscribe(
-      resp => {
-        this.dragonDetails = resp;
-        console.log('>>> DETALJES', this.dragonDetails)
-      }
-    )
-  }
-
-  /**
-   * Create a new dragon
-   * @param dragon 
-  */
-  createDragon(dragon: Dragon) {
-
-    //delete dragon.id;
-
-    dragon.createdAt = moment().format();
-
-    this.dragonsService.createDragon(dragon).subscribe(
-      resp => {
-        console.log('>>> DRAGAO CRIADO', resp)
+      },
+      () => {
+        this.router.navigate([PageRoutes.EMPTY_STATE]);
       }
     )
   }
@@ -120,32 +84,42 @@ export class DragonsListComponent implements OnInit {
       () => {
         this.ngOnInit();
       },
-      error => {
-        console.log('>>> ERRO', error);
-        console.log('>>> MENSAGENS', error.status, error.statusText)
+      () => {
+        this.router.navigate([PageRoutes.EMPTY_STATE]);
       }
     )
   }
 
-/**
- * Delete a dragon
- * @param id dragon index
- */
+  /**
+   * Delete a dragon
+   * @param id dragon index
+   */
   deleteDragon(id: string) {
     this.dragonsService.deleteDragon(id).subscribe(
       () => {
         this.ngOnInit();
       },
-      error => {
-        console.log('>>> ERRO', error);
-        console.log('>>> MENSAGENS', error.status, error.statusText)
+      () => {
+        this.router.navigate([PageRoutes.EMPTY_STATE]);
       }
     )
   }
 
-
+/**
+ * Redirect to details page
+ * @param id index of dragon
+ */
   redirectToDetails(id: string) {
-    this.router.navigate(['']);
+    this.router.navigate([PageRoutes.DRAGON_DETAILS], { state: { id: id }});
   }
+
+  /**
+ * Redirect to register page
+ * @param id index of dragon
+ */
+   redirectToRegister() {
+    this.router.navigate([PageRoutes.REGISTER_DRAGON]);
+  }
+
 }
 

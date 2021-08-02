@@ -1,0 +1,34 @@
+<section>
+    <div class="header">
+        <div class="close-btn" (click)="close()">X</div>
+        <h1>Formulário de cadastro</h1>
+    </div>
+    <div class="register">
+        <label>Insira as informações abaixo: </label>
+        <form [formGroup]="dragonForm">
+            <div class="item">
+                <span>Nome</span><br>
+                <input type="text" placeholder="Nome" formControlName="name">
+                <p class="error">{{ dragonForm.controls.name.invalid && dragonForm.controls.name.touched ? 'Nome em
+                    branco' : '' }}</p>
+            </div>
+
+            <div class="item">
+                <span>Tipo</span><br>
+                <input type="text" placeholder="Tipo" formControlName="type">
+                <p class="error">{{ dragonForm.controls.type.invalid && dragonForm.controls.type.touched ? 'Tipo em
+                    branco' : '' }}</p>
+            </div>
+
+            <div class="item">
+                <span>História</span><br>
+                <input type="text" placeholder="História" formControlName="histories">
+                <p class="error">{{ dragonForm.controls.histories.invalid && dragonForm.controls.histories.touched ?
+                    'História em branco' : '' }}</p>
+            </div>
+        </form>
+    </div>
+    <div class="btn">
+        <button (click)="createDragon(dragonForm.value)" [disabled]="dragonForm.invalid">Criar</button>
+    </div>
+</section>

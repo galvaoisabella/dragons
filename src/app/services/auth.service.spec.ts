@@ -25,7 +25,7 @@ describe('AuthService', () => {
   });
 
   it('should call auth', () => {
-    service.authUser({ address: '123', pass: '123'});
+    service.authUser({ address: 'admin', pass: '123'});
     expect(service.userValidated).toEqual(true);
   });
   

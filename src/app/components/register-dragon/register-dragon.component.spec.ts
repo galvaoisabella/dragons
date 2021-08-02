@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 import { RegisterDragonComponent } from './register-dragon.component';
 import { Router } from '@angular/router';
 import { PageRoutes } from 'src/app/enum/page-routes.enum';
+import { EmptyStateComponent } from '../empty-state/empty-state.component';
 
 describe('RegisterDragonComponent', () => {
   let component: RegisterDragonComponent;
@@ -21,15 +22,21 @@ describe('RegisterDragonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterDragonComponent ],
-      imports: [        
+      declarations: [
+        RegisterDragonComponent,
+        EmptyStateComponent
+      ],
+      imports: [
         BrowserDynamicTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: PageRoutes.EMPTY_STATE, component: EmptyStateComponent },
+          { path: PageRoutes.REGISTER_DRAGON, component: RegisterDragonComponent }
+        ]),
         ReactiveFormsModule,
         HttpClientModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -48,11 +55,11 @@ describe('RegisterDragonComponent', () => {
 
   it('should call editDragon - infoEdited null', () => {
     const dragon: Dragon = {
-      createdAt:'',
-      histories:'teste',
-      name:'teste',
-      type:'teste',
-      id:''
+      createdAt: '',
+      histories: 'teste',
+      name: 'teste',
+      type: 'teste',
+      id: ''
     }
     spyOn(dragonsService, 'createDragon').and.returnValue(of(true));
     spyOn(location, 'back').and.callThrough();
@@ -65,11 +72,11 @@ describe('RegisterDragonComponent', () => {
 
   it('should callfake createDragon and return error', () => {
     const dragon: Dragon = {
-      createdAt:'',
-      histories:'teste',
-      name:'teste',
-      type:'teste',
-      id:''
+      createdAt: '',
+      histories: 'teste',
+      name: 'teste',
+      type: 'teste',
+      id: ''
     }
     spyOn(dragonsService, 'createDragon').and.returnValue(throwError(new Error('')));
     spyOn(router, 'navigate').and.callThrough();

@@ -11,7 +11,7 @@ export class AuthService {
   constructor() { }
 
   authUser(user: User) {
-    this.userValidated = ((user.address === '123')  && (user.pass === '123'))
+    this.userValidated = ((user.address === 'admin')  && (user.pass === '123'))
     return this.userValidated;
   }
 

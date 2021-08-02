@@ -1,0 +1,56 @@
+h1 {
+    color: indianred;
+    padding: 8px;
+    margin: 0px;
+    font-size: 2rem;
+    
+}
+
+span {
+    font-weight: bold;
+}
+
+p {
+    margin: 0px;    
+    padding: 8px 0px;
+}
+
+label {
+    padding-left: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.register {
+    padding: 16px;
+}
+
+.item{
+    padding: 8px
+}
+
+.error {
+    height: 18px;
+    color: red;
+    font-size: 0.8rem;
+    padding: 0px;
+}
+
+.btn {
+    padding: 24px;
+
+    button {
+        height: 32px;
+        min-width: 114px;
+        background: antiquewhite;
+        border: 1px solid gray;
+        border-radius: 7px;
+    }
+    button:disabled {
+        background: currentColor;;
+    }
+
+}

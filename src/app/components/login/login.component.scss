@@ -1,0 +1,78 @@
+section {
+    text-align: center;
+}
+
+.cont {
+    display: flex;
+    margin: 40px 25px;
+    box-shadow: 10px 10px beige;
+
+    &-item {
+        padding: 20px 8px;
+        width: 50%;
+    }
+}
+
+.welcome {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 16px;
+    background: antiquewhite;
+}
+
+.info {
+    text-align: center;
+    background: floralwhite;    
+    padding: 40px 8px 12px 8px;
+
+    span {
+        padding: 8px;
+    }
+    &-item {
+        padding: 8px;
+    }
+    .show-hide {
+        padding: 8px;
+    }
+}
+
+input[type="button"] {
+    background-color: white;
+    border-color: white;
+    border-style: groove;
+    width: 56px;
+    min-height: 23px;
+    text-align: center;
+    padding: 1px;
+}
+
+input[type="text"] {
+    width: 100px;
+}
+input[type="password"] {
+    width: 100px;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    padding: 8px;
+    min-height: 31px;
+}
+
+.btn {
+    padding: 16px;
+}
+
+button {
+    height: 32px;
+    min-width: 114px;
+    background: antiquewhite;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+
+button:disabled {
+    background: currentColor;;
+}

@@ -1,0 +1,33 @@
+<section class="login">
+    <div class="cont">
+        <div class="cont-item welcome">
+            Bem-vindo(a)! <br>
+            Logue para acessar o gerenciador de cadastro de dragões.
+
+        </div>
+        <form class="info cont-item" [formGroup]="formLogin">
+            <div class="info-item">
+                <span>Login:</span>
+                <input type="text" formControlName="login">
+            </div>
+
+            <div class="info-item">
+                <span>Senha:</span>
+                <input [type]="passType" formControlName="pass">
+                <div class="show-hide">
+                    <input type="checkbox" value="" (click)="showPass()">{{ passDisplayed ? 'Ocultar' : 'Mostrar' }}
+                </div>
+            </div>
+            <div class="btn">
+                <div class="error">
+                    <label>{{ formLogin.invalid && formLogin.touched ? 'Login e/ou senha não preenchido' : '' }}</label>
+                    <label>{{ loginSuccess ? '' : 'Login ou senha inválida' }}</label>
+                </div>
+                <button [disabled]="formLogin.invalid" (click)="signOn()"> Entrar </button>
+            </div>
+        </form>
+    </div>
+
+
+    
+</section>

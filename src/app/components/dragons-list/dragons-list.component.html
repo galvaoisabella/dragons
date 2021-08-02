@@ -1,0 +1,38 @@
+<section *ngIf="dragonsList">
+    <div class="header">
+        <h1>Gerenciamento de cadastros</h1>
+
+        <button (click)="redirectToRegister()"> Adicionar dragão </button>
+
+    </div>
+    <p> Cadastrados: </p>
+    <div class="info" *ngFor="let dragon of dragonsList">
+        <div class="btn">
+            <div (click)="redirectToDetails(dragon.id)" class="detail">
+                <h3>{{ dragon.name ? dragon.name : 'Nome não cadastrado' }}</h3>
+                <label>Clique para ver detalhes</label>
+            </div>
+
+            <u (click)="edit = !edit"> Edite </u>
+            <u (click)="deleteDragon(dragon.id)"> Remova </u>
+
+        </div>
+
+
+        <div *ngIf="edit" class="panel">
+            <span>Edite o cadastro: </span>
+            <form [formGroup]="dragonForm">
+                <input type="text" placeholder="Nome" formControlName="name">
+                <input type="text" placeholder="Tipo" formControlName="type">
+                <input type="text" placeholder="História" formControlName="histories">
+            </form>
+
+            <div class="btn">
+                <button (click)="editDragon(dragon,dragonForm.value)">Alterar </button>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+    </div>
+</section>

@@ -1,0 +1,80 @@
+section {
+    padding-right: 16px;
+}
+
+input[type="text"] {
+    margin: 8px;
+}
+
+
+h1 {
+    padding-left: 12px;
+    color: aliceblue;
+}
+
+h3 {
+    margin: 0px;
+    font-size: 1.5rem;
+    color: rgb(105, 52, 31);
+}
+
+span {
+    padding-left: 8px;
+}
+
+label {
+    font-size: 0.65rem;
+}
+
+u {
+    padding: 8px;
+    cursor: pointer;
+    color: indianred;
+}
+p {
+    margin: 0px;
+    padding: 12px 24px 8px;
+}
+.info {
+    padding: 0px 8px;
+}
+
+.panel {
+    padding-left: 8px;
+}
+
+.histories {
+    input[type="text"] {
+        height: 100px;
+        width: 161px;
+    }
+}
+
+.separator {
+    border-bottom: 1px solid gray;
+    width: 100%;
+    margin: 14px 0px;
+}
+
+.detail {
+    cursor: pointer;
+    padding: 0px 8px 16px;
+}
+
+.btn {
+    padding: 8px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: cadetblue;
+    
+button {
+    color: aliceblue;
+    background: indianred;
+    border-radius: 7px;
+    margin: 8px;
+}
+}
